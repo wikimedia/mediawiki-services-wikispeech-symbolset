@@ -1,0 +1,33 @@
+version: v4
+
+base: docker-registry.wikimedia.org/wikimedia-buster
+
+runs:
+  insecurely: true
+
+lives:
+  in: /srv
+
+variants:
+  build:
+    apt:
+      packages: [ gcc, build-essential, sqlite3, git ]
+    copies:
+      - from: local
+        source: ./blubber/go
+        destination: ./go
+      - from: local
+        source: ./blubber/goProjects
+        destination: ./goProjects
+      - from: local
+        source: ./blubber/symbolset
+        destination: ./symbolset
+  production:
+    includes: [ build ]
+    entrypoint: [ "./symbolset/blubber-entrypoint.sh" ]
+  test:
+    includes: [ build ]
+    apt:
+      packages: [ wget ]
+    entrypoint: [ "./symbolset/blubber-entrypoint-test.sh" ]
+
