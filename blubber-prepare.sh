@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
-DIR=`pwd`
+#
+# This script is executed from within the docker image during Blubber build.
+#
+
+mkdir symbolset
+mv * symbolset
 
 m_error() {
   echo $1
@@ -9,20 +14,18 @@ m_error() {
 
 install_go() {
   echo "Installing Go"
-  cd ${DIR}/blubber
+  cd /srv
   if [ ! -f /tmp/go1.13.linux-amd64.tar.gz ]; then
    if ! wget https://dl.google.com/go/go1.13.linux-amd64.tar.gz -O /tmp/go1.13.linux-amd64.tar.gz; then
      m_error "Unable to download Go lang 1.13 from Google!"
    fi
   fi
-  if [ ! -d ${DIR}/blubber/go ]; then
-    tar xvfz /tmp/go1.13.linux-amd64.tar.gz
-  fi
+  tar xvfz /tmp/go1.13.linux-amd64.tar.gz
   echo "Go installed"
 }
 
 install_symbolset() {
-  cd ${DIR}/blubber/symbolset
+  cd /srv/symbolset
 
   cd server
   if ! go build .; then
@@ -52,22 +55,12 @@ install_symbolset() {
 }
 
 
-if [ ! -d ${DIR}/blubber ]; then
-  cd ${DIR}
-  cp -r . /tmp/symbolset_tmp
-  mkdir blubber
-  cd blubber
-  mv /tmp/symbolset_tmp symbolset
-fi
+install_go
 
-if [ ! -d ${DIR}/blubber/go ]; then
-  install_go
-fi
-
-export GOROOT=${DIR}/blubber/go
-export GOPATH=${DIR}/blubber/goProjects
+export GOROOT=/srv/go
+export GOPATH=/srv/goProjects
 export PATH=${GOPATH}/bin:${GOROOT}/bin:${PATH}
 
 install_symbolset
 
-echo "Successfully prepared Symbolset! Now run ./blubber-build.sh"
+echo "Successfully prepared Symbolset!"

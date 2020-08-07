@@ -11,17 +11,10 @@ lives:
 variants:
   build:
     apt:
-      packages: [ gcc, build-essential, sqlite3, git ]
-    copies:
-      - from: local
-        source: ./blubber/go
-        destination: ./go
-      - from: local
-        source: ./blubber/goProjects
-        destination: ./goProjects
-      - from: local
-        source: ./blubber/symbolset
-        destination: ./symbolset
+      packages: [ gcc, build-essential, sqlite3, git, wget, ca-certificates ]
+    builder:
+      command: [ ./blubber-prepare.sh ]
+      requirements: [ . ]
   production:
     includes: [ build ]
     entrypoint: [ "./symbolset/blubber-entrypoint.sh" ]
