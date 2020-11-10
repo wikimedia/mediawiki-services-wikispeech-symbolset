@@ -33,7 +33,9 @@ install_symbolset() {
   fi
 
   if [ ! -d lexdata ]; then
-    git clone git@github.com:stts-se/lexdata.git
+    if ! git clone https://github.com/stts-se/lexdata.git; then
+      m_error "Unable to clone lexdata from git repo"
+    fi
   else
     cd lexdata
     if ! git pull; then
@@ -42,7 +44,9 @@ install_symbolset() {
     cd ..
   fi
 
-  /bin/bash setup.sh lexdata ss_files
+  if ! /bin/bash setup.sh lexdata ss_files; then
+    m_error "setup.sh lexdata ss_files failed"
+  fi
 
   echo "Starting Symbolset server. Will wait a minute for it to start up and download any dependencies, and then kill it."
   ./server -ss_files ss_files &
