@@ -33,7 +33,7 @@ install_symbolset() {
   fi
 
   if [ ! -d lexdata ]; then
-    if ! git clone https://github.com/stts-se/lexdata.git; then
+    if ! git clone https://github.com/stts-se/wikispeech-lexdata.git lexdata; then
       m_error "Unable to clone lexdata from git repo"
     fi
   else
