@@ -36,11 +36,13 @@ func getParam(paramName string, r *http.Request) string {
 }
 
 // print serverMsg to server log, and return an http error with clientMsg and the specified error code (http.StatusInternalServerError, etc)
-func httpError(w http.ResponseWriter, serverMsg string, clientMsg string, errCode int) {
-	log.Println(serverMsg)
-	http.Error(w, clientMsg, errCode)
-}
 
+// func httpError(w http.ResponseWriter, serverMsg string, clientMsg string, errCode int) {
+// 	log.Println(serverMsg)
+// 	http.Error(w, clientMsg, errCode)
+// }
+
+//
 // func readFile(fName string) ([]string, error) {
 // 	bytes, err := ioutil.ReadFile(fName)
 // 	if err != nil {
@@ -281,8 +283,8 @@ func main() {
 	symbolset.addHandler(symbolsetContent)
 	symbolset.addHandler(symbolsetReloadOne)
 	symbolset.addHandler(symbolsetReloadAll)
-	symbolset.addHandler(symbolsetUploadPage)
-	symbolset.addHandler(symbolsetUpload)
+	// symbolset.addHandler(symbolsetUploadPage)
+	// symbolset.addHandler(symbolsetUpload)
 
 	mapper := newSubRouter(rout, "/mapper", "Map transcriptions between different symbol sets")
 	mapper.addHandler(mapperList)

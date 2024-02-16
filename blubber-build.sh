@@ -8,5 +8,5 @@ docker rm wikispeech-symbolset
 docker rmi --force wikispeech-symbolset
 
 # build docker
-blubber .pipeline/blubber.yaml test | docker build --tag wikispeech-symbolset-test --file - .
-blubber .pipeline/blubber.yaml production | docker build --tag wikispeech-symbolset --file - .
+docker build --tag wikispeech-symbolset-test --file .pipeline/blubber.yaml --target test .
+docker build --tag wikispeech-symbolset --file .pipeline/blubber.yaml --target production .

@@ -1,8 +1,8 @@
 module github.com/stts-se/symbolset
 
-go 1.13
+go 1.19
 
 require (
-	github.com/dlclark/regexp2 v1.2.0
-	github.com/gorilla/mux v1.7.4
+	github.com/dlclark/regexp2 v1.8.1
+	github.com/gorilla/mux v1.8.0
 )

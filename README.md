@@ -3,7 +3,7 @@
 Symbolset is a repository for handling phonetic symbol sets and mappers/converters between different symbol sets and languages. Written in `go`.
 
 [![GoDoc](https://godoc.org/github.com/stts-se/symbolset?status.svg)](https://godoc.org/github.com/stts-se/symbolset)
-[![Go Report Card](https://goreportcard.com/badge/github.com/stts-se/symbolset)](https://goreportcard.com/report/github.com/stts-se/symbolset) [![Build Status](https://travis-ci.org/stts-se/symbolset.svg?branch=master)](https://travis-ci.org/stts-se/symbolset)
+[![Go Report Card](https://goreportcard.com/badge/github.com/stts-se/symbolset)](https://goreportcard.com/report/github.com/stts-se/symbolset) [![Build Status](https://travis-ci.com/stts-se/symbolset.svg?branch=master)](https://app.travis-ci.com/stts-se/symbolset)
 
 ## I. Server installation
 
@@ -38,14 +38,19 @@ Symbolset is a repository for handling phonetic symbol sets and mappers/converte
 
 1. Clone Wikispeech lexdata (this might take a couple of minutes)
 
-   `$ git clone https://github.com/stts-se/lexdata.git`
+   `$ git clone https://github.com/stts-se/wikispeech-lexdata.git`
 
 
 2. Setup 
 
-    `server$ bash setup.sh lexdata ss_files`
+    `server$ bash setup.sh wikispeech-lexdata ss_files`
 
 
 3. Start server
 
     `server$ ./server -ss_files ss_files`
+
+
+---
+
+_This work was supported by the Swedish Post and Telecom Authority (PTS) through the grant "Wikispeech – en användargenererad talsyntes på Wikipedia" (2016–2017)._
